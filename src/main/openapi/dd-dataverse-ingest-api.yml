@@ -20,7 +20,7 @@ servers:
   - url: http://localhost:20360/
 
 info:
-  description: Service for ...
+  description: Service for ingesting datasets into Dataverse.
   version: ${project.version}
   title: dd-dataverse-ingest-api
   contact:
@@ -30,7 +30,70 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
 paths:
-  # API endpoints
+  /:
+    get:
+      summary: Returns a description of the service.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: a plain text, human readable description of the service
+                example: |
+                  Dataverse Ingest API Running (v${project.version})
+
+  /ingest:
+    post:
+      summary: Create a new ingest job
+      requestBody:
+        description: The path to the deposit or deposit batch
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportCommand'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJobStatus'
 
 components:
-  # Reusable schemas
+  schemas:
+    ImportCommand:
+      type: object
+      properties:
+        path:
+          type: string
+          format: path
+          description: The path to the deposit or deposit batch
+        singleObject:
+          type: boolean
+          default: false
+          description: Whether the import is for a single deposit or a batch
+    ImportJobStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the job
+        path:
+          type: string
+          format: path
+          description: The path to deposit directory or batch
+        singleObject:
+          type: boolean
+          description: Whether the import is for a single deposit or a batch
+        status:
+          type: string
+          description: The current status of the job
+          enum:
+            - PENDING
+            - RUNNING
+            - SUCCESS
+            - FAILED
