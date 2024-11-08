@@ -80,12 +80,12 @@ components:
       properties:
         id:
           type: string
-          format: uuid
+          format: int
           description: The unique identifier of the job
         path:
           type: string
           format: path
-          description: The path to deposit directory or batch
+          description: The path to deposit directory or batch relative to the inbox
         singleObject:
           type: boolean
           description: Whether the import is for a single deposit or a batch
