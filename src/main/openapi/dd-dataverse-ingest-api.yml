@@ -61,6 +61,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ImportJobStatus'
+    get:
+      parameters:
+        - name: path
+          in: query
+          description: The path to the deposit or deposit batch
+          required: false
+          schema:
+            type: string
+            format: path
+      summary: Get the status of all ingest jobs or a specific job
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImportJobStatus'
 
 components:
   schemas:
@@ -95,5 +114,5 @@ components:
           enum:
             - PENDING
             - RUNNING
-            - SUCCESS
+            - DONE
             - FAILED
