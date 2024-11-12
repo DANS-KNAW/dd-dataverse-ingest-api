@@ -29,7 +29,7 @@
     <artifactId>dd-dataverse-ingest-api</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
-    <name>Dd Dataverse Ingest Api</name>
+    <name>DD Dataverse Ingest API</name>
     <url>https://github.com/DANS-KNAW/dd-dataverse-ingest-api</url>
     <description>API definition for dd-dataverse-ingest</description>
     <inceptionYear>2024</inceptionYear>
