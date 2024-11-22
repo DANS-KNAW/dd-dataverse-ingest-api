@@ -48,7 +48,7 @@ paths:
     post:
       summary: Create a new ingest job
       requestBody:
-        description: The path to the deposit or deposit batch
+        description: An ingest command object
         required: true
         content:
           application/json:
@@ -80,6 +80,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ImportJobStatus'
+
+  /convert-dans-bag:
+    post:
+      summary: Convert a DANS deposit to an ingest depost
+      requestBody:
+        description: A convert command object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConvertDansBagCommand'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionResult'
 
 components:
   schemas:
@@ -116,3 +134,27 @@ components:
             - RUNNING
             - DONE
             - FAILED
+    ConvertDansBagCommand:
+      type: object
+      properties:
+        path:
+          type: string
+          format: path
+          description: The path to the deposit or deposit batch
+        singleObject:
+          type: boolean
+          default: false
+          description: Whether the import is for a single deposit or a batch
+    ConversionResult:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status of the conversion
+          enum:
+            - SUCCESS
+            - FAILED
+        message:
+          type: string
+          description: A message indicating the result of the conversion
+      # TODO: maybe extend with list of problems
