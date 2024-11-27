@@ -94,6 +94,10 @@ components:
           type: boolean
           default: false
           description: Whether the import is for a single deposit or a batch
+        migration:
+          type: boolean
+          default: false
+          description: Whether this is a migration import from EASY
         onlyConvertDansBag:
           type: boolean
           default: false
