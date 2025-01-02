@@ -87,6 +87,33 @@ paths:
                 items:
                   $ref: '#/components/schemas/ImportJobStatus'
 
+  /ingest/cancel:
+    post:
+      parameters:
+        - name: path
+          in: query
+          description: The path of the job to cancel
+          required: false
+          schema:
+            type: string
+            format: path
+        - name: migration
+          in: query
+          description: Whether this is a migration import from EASY
+          required: false
+          schema:
+            type: boolean
+      summary: Cancel an ingest job
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImportJobStatus'
+
 components:
   schemas:
     ImportCommand:
