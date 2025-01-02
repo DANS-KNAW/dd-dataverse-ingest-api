@@ -70,6 +70,12 @@ paths:
           schema:
             type: string
             format: path
+        - name: migration
+          in: query
+          description: Whether this is a migration import from EASY
+          required: false
+          schema:
+            type: boolean
       summary: Get the status of all ingest jobs or a specific job
       responses:
         '200':
@@ -102,13 +108,13 @@ components:
           type: boolean
           default: false
           description: Whether to only convert DANS deposits to Dataverse ingest format and then stop
+        continueBatch:
+          type: boolean
+          default: false
+          description: Whether to continue a batch that was stopped or failed
     ImportJobStatus:
       type: object
       properties:
-        id:
-          type: string
-          format: int
-          description: The unique identifier of the job
         path:
           type: string
           format: path
@@ -124,3 +130,6 @@ components:
             - RUNNING
             - DONE
             - FAILED
+        message:
+          type: string
+          description: A message describing the current status
