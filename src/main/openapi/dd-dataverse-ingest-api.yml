@@ -70,12 +70,6 @@ paths:
           schema:
             type: string
             format: path
-        - name: migration
-          in: query
-          description: Whether this is a migration import from EASY
-          required: false
-          schema:
-            type: boolean
       summary: Get the status of all ingest jobs or a specific job
       responses:
         '200':
@@ -97,12 +91,6 @@ paths:
           schema:
             type: string
             format: path
-        - name: migration
-          in: query
-          description: Whether this is a migration import from EASY
-          required: false
-          schema:
-            type: boolean
       summary: Cancel an ingest job
       responses:
         '202':
@@ -127,10 +115,6 @@ components:
           type: boolean
           default: false
           description: Whether the import is for a single deposit or a batch
-        migration:
-          type: boolean
-          default: false
-          description: Whether this is a migration import from EASY
         onlyConvertDansBag:
           type: boolean
           default: false
