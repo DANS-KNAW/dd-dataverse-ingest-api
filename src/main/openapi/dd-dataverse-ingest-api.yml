@@ -32,6 +32,7 @@ info:
 paths:
   /:
     get:
+      operationId: rootGet
       summary: Returns a description of the service.
       responses:
         '200':
@@ -46,6 +47,7 @@ paths:
 
   /ingest:
     post:
+      operationId: ingestPost
       summary: Create a new ingest job
       requestBody:
         description: An ingest command object
@@ -62,6 +64,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ImportJobStatus'
     get:
+      operationId: ingestGet
       parameters:
         - name: path
           in: query
@@ -83,6 +86,7 @@ paths:
 
   /ingest/cancel:
     post:
+      operationId: ingestCancelPost
       parameters:
         - name: path
           in: query
